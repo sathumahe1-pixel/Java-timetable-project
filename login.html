@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timetable Generator - Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url("BG.jpg") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    /* Glowing heading */
+    h1.page-heading {
+      color: black;
+      font-size: 40px;
+      text-align: center;
+      margin-top: 30px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: glow 1.5s infinite alternate;
+      text-shadow: 0 0 10px #fff, 0 0 20px #00ccff, 0 0 30px #00ccff;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #00ccff, 0 0 30px #00ccff;
+      }
+      to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #00ffcc, 0 0 40px #00ffcc;
+      }
+    }
+
+    .login-container {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      width: 360px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      color: #fff;
+      animation: fadeIn 1s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center contents horizontally */
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-container h1 {
+      margin-bottom: 25px;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .input-group {
+      position: relative;
+      width: 80%; /* Make all input fields same width */
+      margin: 15px 0;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 40px;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .input-group input::placeholder {
+      color: #ddd;
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .login-container button {
+      width: 60%; /* Match width of input fields */
+      padding: 12px;
+      margin-top: 20px;
+      background: #00ccff;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+    }
+
+    .login-container button:hover {
+      background: #00ffaa;
+      box-shadow: 0 0 15px #00ffaa, 0 0 30px #00ffaa;
+      transform: scale(1.05);
+    }
+
+    .login-container .extra-links {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-container .extra-links a {
+      color: #00ccff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .login-container .extra-links a:hover {
+      color: #00ffaa;
+    }
+
+    .error {
+      color: #ff4d4d;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-heading">Timetable Generator Login Form</h1>
+
+  <div class="login-container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <div class="input-group">
+        <i class="fa fa-user"></i>
+        <input type="text" id="username" placeholder="Username" required>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+      <button type="submit">LOGIN</button>
+      <div class="error" id="errorMessage"></div>
+    </form>
+    <div class="extra-links">
+      <p><a href="#">Forgot your Password?</a></p>
+      <p>Don’t have an account? <a href="#">Sign up</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+
+      if (username === "Admin" && password === "12345") {
+        window.location.href = "dashboard.html"; 
+      } else {
+        document.getElementById("errorMessage").textContent = "Invalid Username or Password!";
+      }
+    });
+  </script>
+
+
+</body>
+</html>

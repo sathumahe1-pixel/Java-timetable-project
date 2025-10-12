@@ -1,0 +1,54 @@
+<!-- teachers.html -->
+<h2>Teachers</h2>
+<form id="teacherForm">
+  <input type="text" id="name" placeholder="Teacher name" required>
+  <input type="number" id="maxPeriod" placeholder="Max Period/Day" required>
+  <button type="submit">Add Teacher</button>
+</form>
+
+<table id="teachersTable">
+  <thead>
+    <tr><th>Name</th><th>Subjects</th><th>Max Period</th><th>Action</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  const API_URL = "http://localhost:8080/api/teachers";
+
+  // Load teachers
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector("#teachersTable tbody");
+      tbody.innerHTML = "";
+      data.forEach(t => {
+        tbody.innerHTML += `<tr>
+          <td>${t.name}</td>
+          <td>${t.subjects.join(", ")}</td>
+          <td>${t.maxPeriodPerDay}</td>
+          <td><button onclick="deleteTeacher(${t.id})">Delete</button></td>
+        </tr>`;
+      });
+    });
+
+  // Add teacher
+  document.getElementById("teacherForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const teacher = {
+      name: document.getElementById("name").value,
+      maxPeriodPerDay: document.getElementById("maxPeriod").value,
+      subjects: []
+    };
+    fetch(API_URL, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(teacher)
+    }).then(() => location.reload());
+  });
+
+  function deleteTeacher(id) {
+    fetch(`${API_URL}/${id}`, { method: "DELETE" })
+      .then(() => location.reload());
+  }
+</script>
