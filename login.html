@@ -168,12 +168,35 @@
 
       let username = document.getElementById("username").value;
       let password = document.getElementById("password").value;
+      let errorElement = document.getElementById("errorMessage");
 
-      if (username === "Admin" && password === "12345") {
-        window.location.href = "dashboard.html"; 
-      } else {
-        document.getElementById("errorMessage").textContent = "Invalid Username or Password!";
-      }
+      // Clear previous error
+      errorElement.textContent = "";
+
+      // Send login request to server
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          errorElement.style.color = "#00ff00";
+          errorElement.textContent = data.message;
+          // Keep the page open as requested
+        } else {
+          errorElement.style.color = "#ff4d4d";
+          errorElement.textContent = data.message;
+        }
+      })
+      .catch(error => {
+        errorElement.style.color = "#ff4d4d";
+        errorElement.textContent = "Error connecting to server!";
+        console.error("Login error:", error);
+      });
     });
   </script>
 
