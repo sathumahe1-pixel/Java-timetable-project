@@ -31,6 +31,12 @@ public class TimetableGeneratorApp extends JFrame {
         tabbedPane.addTab("Generate", new GeneratePanel(teacherModel, subjectModel, classroomModel));
 
         add(tabbedPane);
+
+        // Ensure window opens in focus
+        setAlwaysOnTop(true);
+        toFront();
+        requestFocus();
+        setAlwaysOnTop(false);
     }
 
     public static void main(String[] args) {

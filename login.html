@@ -186,7 +186,10 @@
         if (data.success) {
           errorElement.style.color = "#00ff00";
           errorElement.textContent = data.message;
-          // Keep the page open as requested
+          // Automatically close the browser window after successful login
+          setTimeout(function() {
+            window.close();
+          }, 1500); // Close after 1.5 seconds to show success message
         } else {
           errorElement.style.color = "#ff4d4d";
           errorElement.textContent = data.message;

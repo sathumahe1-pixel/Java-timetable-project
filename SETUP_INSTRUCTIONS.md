@@ -13,7 +13,7 @@ This project allows users to login via a web browser and automatically launch th
 
 1. **Double-click `start-server.bat`** in the project root directory
    - This will compile the LoginServer and start the HTTP server
-   - Your browser will automatically open to `http://localhost:8080/login.html`
+   - Your browser will automatically open to `http://localhost:8080/`
 
 2. **Login**
    - Username: `Admin`
